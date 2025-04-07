@@ -7,6 +7,8 @@ a task should have
 ### Features
 
 - Create a task
+- Update a task
+- Delete a task
 - List all tasks
 - Store tasks (db or json?)
 - Complete a task
