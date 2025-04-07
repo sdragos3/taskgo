@@ -3,3 +3,11 @@ a task should have
 - description string
 - priority enum
 - done bool
+
+### Features
+
+- Create a task
+- List all tasks
+- Store tasks (db or json?)
+- Complete a task
+- Wipe store
