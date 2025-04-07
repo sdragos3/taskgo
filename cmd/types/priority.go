@@ -1,9 +1,30 @@
 package types
 
-type Priority int
+import "fmt"
+
+type Priority string
 
 const (
-	High   Priority = iota
-	Medium          = 1
-	Low             = 2
+	High   Priority = "high"
+	Medium          = "medium"
+	Low             = "low"
+	None            = "none"
 )
+
+func (p *Priority) Set(s string) error {
+	switch s {
+	case "low", "medium", "high", "none":
+		*p = Priority(s)
+		return nil
+	default:
+		return fmt.Errorf("invalid priority: %s", s)
+	}
+}
+
+func (p *Priority) String() string {
+	return string(*p)
+}
+
+func (p *Priority) Type() string {
+	return "priority"
+}
