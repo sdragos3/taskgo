@@ -2,11 +2,19 @@ package cmd
 
 import "fmt"
 
-func Execute() {
-	var name string
-
+func prompt() {
 	fmt.Print("> ")
-	fmt.Scan(&name)
+}
 
-	fmt.Printf("You entered %s", name)
+func Execute() {
+	loop()
+}
+
+func loop() {
+	var name string
+	for {
+		prompt()
+		fmt.Scan(&name)
+		fmt.Printf("You entered %s\n", name)
+	}
 }
