@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/sdragos3/taskgo/cmd"
 
 func main() {
-    fmt.Println("Welcome to your ToDo CLI!")
+	cmd.Execute()
 }
