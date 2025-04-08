@@ -15,6 +15,13 @@ func Initialize() error {
 	return createDatabaseFile()
 }
 
+func Delete() error {
+	if databaseFileExists() {
+		return os.Remove(dbPath)
+	}
+	return nil
+}
+
 func Write(bytes []byte) (int, error) {
 	f, err := os.OpenFile(dbPath, os.O_APPEND|os.O_WRONLY, 0644)
 

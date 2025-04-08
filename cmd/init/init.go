@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var createCmd = &cobra.Command{
+var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize taskgo",
 	Long:  `Initializes taskgo database`,
@@ -19,5 +19,5 @@ var createCmd = &cobra.Command{
 }
 
 func init() {
-	root.RootCmd.AddCommand(createCmd)
+	root.RootCmd.AddCommand(initCmd)
 }
