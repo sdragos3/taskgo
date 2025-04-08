@@ -1,4 +1,4 @@
-package types
+package models
 
 import "fmt"
 
@@ -17,7 +17,7 @@ func (p *Priority) Set(s string) error {
 		*p = Priority(s)
 		return nil
 	default:
-		return fmt.Errorf("invalid priority: %s", s)
+		return fmt.Errorf("invalid Priority: %s", s)
 	}
 }
 
@@ -26,5 +26,5 @@ func (p *Priority) String() string {
 }
 
 func (p *Priority) Type() string {
-	return "priority"
+	return "Priority"
 }
