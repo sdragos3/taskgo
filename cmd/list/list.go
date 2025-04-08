@@ -9,11 +9,11 @@ import (
 
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Lists all available commands",
+	Short: "Lists all tasks",
 	Run: func(cmd *cobra.Command, args []string) {
 		tasks, err := repository.List()
 		if err != nil {
-			fmt.Println("Error listing commands:", err)
+			fmt.Println("Error listing tasks:", err)
 		}
 		for _, task := range tasks {
 			fmt.Println(task.ToString())

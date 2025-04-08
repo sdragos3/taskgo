@@ -6,6 +6,7 @@ import (
 	_ "github.com/sdragos3/taskgo/cmd/create"
 	_ "github.com/sdragos3/taskgo/cmd/init"
 	_ "github.com/sdragos3/taskgo/cmd/list"
+	_ "github.com/sdragos3/taskgo/cmd/update"
 )
 
 func main() {
