@@ -19,3 +19,17 @@ func Create(task *models.Task) error {
 	fmt.Println("Task created")
 	return nil
 }
+
+func List() ([]models.Task, error) {
+	tasks := make([]models.Task, 0)
+
+	dbBuffer, err := db.ReadAll()
+	if err != nil {
+		return tasks, err
+	}
+	err = json.Unmarshal(dbBuffer, &tasks)
+	if err != nil {
+		return tasks, err
+	}
+	return tasks, nil
+}

@@ -1,6 +1,9 @@
 package models
 
-import "github.com/google/uuid"
+import (
+	"fmt"
+	"github.com/google/uuid"
+)
 
 type Task struct {
 	Id          uuid.UUID
@@ -18,4 +21,8 @@ func TaskCreate(title string, description string, priority Priority) Task {
 		Completed:   false,
 		Priority:    priority,
 	}
+}
+
+func (task *Task) ToString() string {
+	return fmt.Sprintf("id: %s | title: \"%s\" | description: \"%s\" | completed: %t", task.Id, task.Title, task.Description, task.Completed)
 }

@@ -41,16 +41,41 @@ func Write(bytes []byte) (int, error) {
 	}
 	if dbEmpty {
 		bytes = append([]byte("[\n"), bytes...)
-		bytes = append(bytes, []byte("\n]")...)
+		bytes = append(bytes, []byte("\n]\n")...)
 	} else {
-		_, err := f.Seek(-2, io.SeekEnd)
+		_, err := f.Seek(-3, io.SeekEnd)
 		if err != nil {
 			return 0, err
 		}
 		bytes = append([]byte(","), bytes...)
-		bytes = append(bytes, []byte("\n]")...)
+		bytes = append(bytes, []byte("\n]\n")...)
 	}
 	return f.Write(bytes)
+}
+
+func Read(b []byte) (int, error) {
+	f, err := os.OpenFile(dbPath, os.O_RDONLY, 0644)
+	if err != nil {
+		return 0, err
+	}
+	defer func(f *os.File) {
+		err := f.Close()
+		if err != nil {
+			fmt.Printf("%s", err.Error())
+		}
+	}(f)
+	n, err := f.Read(b)
+	if err == io.EOF {
+		err = nil
+	}
+	if err != nil {
+		return 0, err
+	}
+	return n, err
+}
+
+func ReadAll() ([]byte, error) {
+	return os.ReadFile(dbPath)
 }
 
 func databaseFileExists() bool {
