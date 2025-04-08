@@ -3,7 +3,7 @@ package create
 import (
 	"fmt"
 	root "github.com/sdragos3/taskgo/cmd"
-	models "github.com/sdragos3/taskgo/models"
+	"github.com/sdragos3/taskgo/models"
 	"github.com/spf13/cobra"
 )
 
