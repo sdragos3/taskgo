@@ -1,9 +1,9 @@
 package create
 
 import (
-	"fmt"
 	root "github.com/sdragos3/taskgo/cmd"
 	"github.com/sdragos3/taskgo/models"
+	repository "github.com/sdragos3/taskgo/persistence/repositories"
 	"github.com/spf13/cobra"
 )
 
@@ -17,7 +17,10 @@ var createCmd = &cobra.Command{
 	Long:  `Create new task`,
 	Run: func(cmd *cobra.Command, args []string) {
 		task := models.TaskCreate(title, description, priority)
-		fmt.Printf("%s", task)
+		err := repository.Create(&task)
+		if err != nil {
+			panic(err)
+		}
 	},
 }
 
