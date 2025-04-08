@@ -6,9 +6,9 @@ type Priority string
 
 const (
 	High   Priority = "high"
-	Medium          = "medium"
-	Low             = "low"
-	None            = "none"
+	Medium Priority = "medium"
+	Low    Priority = "low"
+	None   Priority = "none"
 )
 
 func (p *Priority) Set(s string) error {

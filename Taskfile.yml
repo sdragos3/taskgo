@@ -1,0 +1,24 @@
+version: '3'
+
+vars:
+  NAME: taskgo
+
+
+tasks:
+  default:
+    cmds:
+      - task: build
+
+  init:
+    cmds:
+      - go install github.com/spf13/cobra-cli@latest
+      - go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.62.2
+
+  build:
+    cmds:
+      - go build
+
+  lint:
+    desc: "lint the code"
+    cmds:
+      - golangci-lint run
