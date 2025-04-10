@@ -63,3 +63,10 @@ func (d *TaskgoDb) GetByKey(key string) ([]byte, error) {
 func (d *TaskgoDb) Close() error {
 	return d.db.Close()
 }
+
+func (d *TaskgoDb) Delete(key string) error {
+	return d.db.Update(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("tasks"))
+		return b.Delete([]byte(key))
+	})
+}

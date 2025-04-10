@@ -64,3 +64,15 @@ func GetById(id uuid.UUID) (*models.Task, error) {
 	err = db.Close()
 	return &task, err
 }
+
+func DeleteById(id uuid.UUID) error {
+	db, err := database.Open()
+	if err != nil {
+		return err
+	}
+	err = db.Delete(id.String())
+	if err != nil {
+		return err
+	}
+	return db.Close()
+}
