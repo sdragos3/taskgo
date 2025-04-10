@@ -1,2 +1,2 @@
-# messago
-Command Line Messaging Interface
+# TaskGo
+Todolist in the CLI written in Golang
