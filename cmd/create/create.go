@@ -13,11 +13,11 @@ var priority models.Priority = models.None
 
 var createCmd = &cobra.Command{
 	Use:   "create",
-	Short: "Create new task",
-	Long:  `Create new task`,
+	Short: "Insert new task",
+	Long:  `Insert new task`,
 	Run: func(cmd *cobra.Command, args []string) {
 		task := models.TaskCreate(title, description, priority)
-		err := repository.Create(&task)
+		err := repository.Insert(&task)
 		if err != nil {
 			panic(err)
 		}

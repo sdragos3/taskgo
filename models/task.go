@@ -23,6 +23,18 @@ func TaskCreate(title string, description string, priority Priority) Task {
 	}
 }
 
-func (task *Task) ToString() string {
-	return fmt.Sprintf("id: %s | title: \"%s\" | description: \"%s\" | completed: %t", task.Id, task.Title, task.Description, task.Completed)
+func (task *Task) String() string {
+	return fmt.Sprintf("id: %s | title: \"%s\" | description: \"%s\" | completed: %t | priority: %s", task.Id, task.Title, task.Description, task.Completed, task.Priority)
+}
+
+func (task *Task) Update(title *string, description *string, priority *Priority) {
+	if priority != nil {
+		task.Priority = *priority
+	}
+	if title != nil {
+		task.Title = *title
+	}
+	if description != nil {
+		task.Description = *description
+	}
 }

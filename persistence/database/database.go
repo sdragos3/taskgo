@@ -49,3 +49,17 @@ func (d *TaskgoDb) DumpBucket() (map[string][]byte, error) {
 	})
 	return data, err
 }
+
+func (d *TaskgoDb) GetByKey(key string) ([]byte, error) {
+	var data []byte
+	err := d.db.View(func(tx *bbolt.Tx) error {
+		b := tx.Bucket([]byte("tasks"))
+		data = b.Get([]byte(key))
+		return nil
+	})
+	return data, err
+}
+
+func (d *TaskgoDb) Close() error {
+	return d.db.Close()
+}

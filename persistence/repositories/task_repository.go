@@ -2,11 +2,12 @@ package repositories
 
 import (
 	"encoding/json"
+	"github.com/google/uuid"
 	"github.com/sdragos3/taskgo/models"
 	"github.com/sdragos3/taskgo/persistence/database"
 )
 
-func Create(task *models.Task) error {
+func Insert(task *models.Task) error {
 	db, err := database.Open()
 	if err != nil {
 		return err
@@ -15,7 +16,12 @@ func Create(task *models.Task) error {
 	if err != nil {
 		return err
 	}
-	return db.Insert(task.Id.String(), bytes)
+	err = db.Insert(task.Id.String(), bytes)
+	if err != nil {
+		return err
+	}
+	err = db.Close()
+	return err
 }
 
 func List() ([]models.Task, error) {
@@ -36,5 +42,25 @@ func List() ([]models.Task, error) {
 		}
 		tasks = append(tasks, task)
 	}
+	err = db.Close()
 	return tasks, nil
+}
+
+func GetById(id uuid.UUID) (*models.Task, error) {
+	db, err := database.Open()
+	if err != nil {
+		return nil, err
+	}
+	var task models.Task
+
+	b, err := db.GetByKey(id.String())
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(b, &task)
+	if err != nil {
+		return nil, err
+	}
+	err = db.Close()
+	return &task, err
 }

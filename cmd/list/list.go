@@ -16,7 +16,7 @@ var listCmd = &cobra.Command{
 			fmt.Println("Error listing tasks:", err)
 		}
 		for _, task := range tasks {
-			fmt.Println(task.ToString())
+			fmt.Println(task.String())
 		}
 	},
 }
