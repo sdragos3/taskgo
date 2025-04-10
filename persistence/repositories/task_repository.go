@@ -2,34 +2,39 @@ package repositories
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/sdragos3/taskgo/models"
-	db "github.com/sdragos3/taskgo/persistence"
+	"github.com/sdragos3/taskgo/persistence/database"
 )
 
 func Create(task *models.Task) error {
-	b, err := json.MarshalIndent(task, "", " ")
+	db, err := database.Open()
 	if err != nil {
 		return err
 	}
-	_, err = db.Write(b)
+	bytes, err := json.Marshal(task)
 	if err != nil {
 		return err
 	}
-	fmt.Println("Task created")
-	return nil
+	return db.Insert(task.Id.String(), bytes)
 }
 
 func List() ([]models.Task, error) {
-	tasks := make([]models.Task, 0)
-
-	dbBuffer, err := db.ReadAll()
+	db, err := database.Open()
 	if err != nil {
-		return tasks, err
+		return nil, err
 	}
-	err = json.Unmarshal(dbBuffer, &tasks)
+	bucket, err := db.DumpBucket()
 	if err != nil {
-		return tasks, err
+		return nil, err
+	}
+	var tasks []models.Task
+
+	for _, elem := range bucket {
+		var task models.Task
+		if err := json.Unmarshal(elem, &task); err != nil {
+			return nil, err
+		}
+		tasks = append(tasks, task)
 	}
 	return tasks, nil
 }

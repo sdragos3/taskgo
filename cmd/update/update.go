@@ -8,9 +8,9 @@ import (
 )
 
 var id string
-var title string
-var description string
-var priority models.Priority
+var title *string
+var description *string
+var priority *models.Priority
 
 var updateCmd = &cobra.Command{
 	Use:   "update",
@@ -22,9 +22,10 @@ var updateCmd = &cobra.Command{
 
 func init() {
 	updateCmd.Flags().StringVarP(&id, "id", "i", "", "ID of the task to update")
-	updateCmd.Flags().StringVarP(&title, "title", "t", "", "task title")
-	updateCmd.Flags().StringVarP(&description, "description", "d", "", "task description")
-	updateCmd.Flags().VarP(&priority, "priority", "p", "task priority")
+	updateCmd.Flags().StringVarP(title, "title", "t", "", "task title")
+	updateCmd.Flags().StringVarP(description, "description", "d", "", "task description")
+	updateCmd.Flags().VarP(priority, "priority", "p", "task priority")
 
+	updateCmd.MarkFlagRequired("id")
 	root.RootCmd.AddCommand(updateCmd)
 }

@@ -1,8 +1,9 @@
 package init
 
 import (
+	"fmt"
 	root "github.com/sdragos3/taskgo/cmd"
-	database "github.com/sdragos3/taskgo/persistence"
+	"github.com/sdragos3/taskgo/persistence/database"
 	"github.com/spf13/cobra"
 )
 
@@ -11,9 +12,10 @@ var initCmd = &cobra.Command{
 	Short: "Initialize taskgo",
 	Long:  `Initializes taskgo database`,
 	Run: func(cmd *cobra.Command, args []string) {
-		err := database.Initialize()
+		fmt.Println("init called")
+		err := database.Init()
 		if err != nil {
-			panic(err)
+			fmt.Println("Error initializing database:", err)
 		}
 	},
 }
